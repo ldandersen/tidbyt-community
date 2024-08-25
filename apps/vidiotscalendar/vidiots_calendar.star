@@ -102,29 +102,36 @@ def render_animation_for_movies(movies, full_animation):
                             children = [
                                 render.Text(showtime_extra_text, color = "#ed1c24"),
                             ],
-                        ),
-                    ],
-                ),
+                        )
+                    ]
+                )
             )
 
         children.append(
-            render.Marquee(
-                offset_start = 64,
-                offset_end = 64,
-                width = 64,
-                child = render.Column(
-                    children = [
-                        render.Row(
-                            children = [
-                                render.Text(current_movie.title, color = "#67bdee"),
-                            ],
-                        ),
-                        render.Row(
-                            children = times,
-                        ),
-                    ],
-                ),
-            ),
+            render.Column(
+                main_align="center",
+                children = [
+                    render.Row(
+                        children = [
+                            render.Text(current_movie.title, color = "#67bdee"),
+                        ]
+                    ),
+                    render.Row(
+                        children = times,
+                    )
+                ]
+            )
+        )
+
+        children.append(
+            render.Padding(
+                pad=(4, 0, 4, 0),
+                child=render.Box(
+                    width=1,
+                    height=16,
+                    color="#ee7db8"
+                )
+            )
         )
 
     return render.Root(
@@ -151,11 +158,14 @@ def render_animation_for_movies(movies, full_animation):
                             ],
                         ),
                     ),
-                    render.Box(
-                        child = render.Sequence(
-                            children = children,
-                        ),
-                    ),
+                    render.Marquee(
+                        offset_start = 64,
+                        offset_end = 64,
+                        width = 64,
+                        child=render.Row(
+                            children = children
+                        )
+                    )
                 ],
             ),
         ),
